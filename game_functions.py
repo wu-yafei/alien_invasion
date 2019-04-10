@@ -6,9 +6,9 @@ from bullet import Bullet
 from alien import Alien
 
 def update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets):
-	# ¸üÐÂ×Óµ¯Î»ÖÃ
+	# ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Î»ï¿½ï¿½
 	bullets.update()
-	# É¾³ýÒÑÏûÊ§µÄ×Óµ¯
+	# É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½Óµï¿½
 	for bullet in bullets.copy():
 		if bullet.rect.bottom<=0:
 			bullets.remove(bullet)
@@ -19,8 +19,8 @@ def update_bullets(ai_settings,screen,stats,sb,ship,aliens,bullets):
 
 def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,
 		aliens,bullets):
-	"""ÏìÓ¦×Óµ¯ºÍÍâÐÇÈËµÄÅö×²"""
-	# É¾³ý·¢ÉúÅö×²µÄÍâÐÇÈË
+	"""ï¿½ï¿½Ó¦ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½×²"""
+	# É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	collisions=pygame.sprite.groupcollide(bullets,aliens,False,True)
 	
 	if collisions:
@@ -30,37 +30,37 @@ def check_bullet_alien_collisions(ai_settings,screen,stats,sb,ship,
 		check_high_score(stats,sb)
 	
 	if len(aliens)==0:
-		# É¾³ýÏÖÓÐ×Óµ¯²¢ÐÂ½¨Ò»ÈºÍâÐÇÈË
+		# É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Â½ï¿½Ò»Èºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		bullets.empty()
 		ai_settings.increase_speed()
 		
-		# Ìá¸ßµÈ¼¶
+		# ï¿½ï¿½ßµÈ¼ï¿½
 		stats.level+=1
 		sb.prep_level()
 		
 		create_fleet(ai_settings,screen,ship,aliens)
 		
 def fire_bullet(ai_settings,screen,ship,bullets):
-	# ´´½¨ÐÂ×Óµ¯²¢½«Æä¼ÓÈëµ½±à×ébulletsÖÐ
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½bulletsï¿½ï¿½
 	if len(bullets)<ai_settings.bullets_allowed:
 		new_bullet=Bullet(ai_settings,screen,ship)
 		bullets.add(new_bullet)
 
 def get_number_rows(ai_settings,ship_height,alien_height):
-	"""¼ÆËãÆÁÄ»¿ÉÈÝÄÉ¶àÉÙÐÐÍâÐÇÈË"""
+	"""ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"""
 	available_space_y=(ai_settings.screen_height-
 						(3*alien_height)-ship_height)
 	number_rows=int(available_space_y/(2*alien_height))
 	return number_rows
 	
 def get_number_aliens_x(ai_settings,alien_width):
-	# ¼ÆËãÒ»ÐÐ¿ÉÈÝÄÉ¶àÉÙ¸öÍâÐÇÈË
+	# ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	available_space_x = ai_settings.screen_width - 2 * alien_width
 	number_aliens_x = int(available_space_x / (2 * alien_width))
 	return number_aliens_x
 	
 def create_alien(ai_settings,screen,aliens,alien_number,row_number):
-	#´´½¨Ò»¸öÍâÐÇÈË²¢¼ÓÈëµ½µ±Ç°ÐÐ
+	#ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½Ç°ï¿½ï¿½
 	alien=Alien(ai_settings,screen)
 	alien_width=alien.rect.width
 	alien.x=alien_width+2*alien_width*alien_number
@@ -69,26 +69,26 @@ def create_alien(ai_settings,screen,aliens,alien_number,row_number):
 	aliens.add(alien)
 		
 def create_fleet(ai_settings,screen,ship,aliens):
-	"""´´½¨ÍâÐÇÈËÈº"""
-	# ´´½¨Ò»¸öÍâÐÇÈË£¬²¢¼ÆËãÒ»ÐÐ¿ÉÈÝÄÉ¶àÉÙ¸öÍâÐÇÈË
+	"""ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èº"""
+	# ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	alien=Alien(ai_settings,screen)	
 	number_aliens_x = get_number_aliens_x(ai_settings, alien.rect.width)
 	number_rows=get_number_rows(ai_settings,ship.rect.height,
 				alien.rect.height)
 	
-	#´´½¨µÚÒ»ÐÐÍâÐÇÈË
+	#ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	for row_number in range(number_rows):
 		for alien_number in range(number_aliens_x):
 			create_alien(ai_settings,screen,aliens,alien_number,
 					row_number)
 					
 def save_high_score(ai_settings,stats):
-	"""½«×î¸ß·ÖÐ´ÈëÎÄ¼þ±£´æ"""
+	"""ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ð´ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½"""
 	with open(ai_settings.high_score_filename,'w') as f_obj:
 		f_obj.write(str(stats.high_score))
 
 def check_keydown_events(event,ai_settings,screen,stats,ship,bullets):
-	"""ÏìÓ¦°´¼ü"""
+	"""ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½"""
 	if event.key==pygame.K_RIGHT:
 		ship.moving_right=True
 	elif event.key==pygame.K_LEFT:
@@ -100,14 +100,14 @@ def check_keydown_events(event,ai_settings,screen,stats,ship,bullets):
 		sys.exit()
 
 def check_keyup_events(event,ship):
-	"""ÏìÓ¦ËÉ¿ª"""
+	"""ï¿½ï¿½Ó¦ï¿½É¿ï¿½"""
 	if event.key==pygame.K_RIGHT:
 		ship.moving_right=False
 	elif event.key==pygame.K_LEFT:
 		ship.moving_left=False
 
 def check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets):
-	"""ÏìÓ¦°´¼üºÍÊó±êÊÂ¼þ"""
+	"""ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½"""
 	for event in pygame.event.get():
 		if event.type==pygame.QUIT:
 			save_high_score(ai_settings,stats)
@@ -123,101 +123,101 @@ def check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets):
 
 def check_play_button(ai_settings,screen,stats,sb,play_button,ship,aliens
 		,bullets,mouse_x,mouse_y):
-	"""ÔÚÍæ¼Òµ¥»úPlay°´Å¥Ê±¿ªÊ¼ÓÎÏ·"""
+	"""ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½Playï¿½ï¿½Å¥Ê±ï¿½ï¿½Ê¼ï¿½ï¿½Ï·"""
 	button_clicked=play_button.rect.collidepoint(mouse_x,mouse_y)
 	if button_clicked and not stats.game_active:
-		# ÖØÖÃÓÎÏ·ÉèÖÃ
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½
 		ai_settings.initialize_dynamic_settings()
-		# Òþ²Ø¹â±ê
+		# ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½
 		pygame.mouse.set_visible(False)
-		# ÖØÖÃÓÎÏ·Í³¼ÆÐÅÏ¢
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·Í³ï¿½ï¿½ï¿½ï¿½Ï¢
 		stats.reset_stats()
 		stats.game_active=True
 		
-		# ÖØÖÃ¼Ç·ÖÅÆÍ¼Ïñ
+		# ï¿½ï¿½ï¿½Ã¼Ç·ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 		sb.prep_score()
 		sb.prep_high_score()
 		sb.prep_level()
 		sb.prep_ships()
 		
-		# Çå¿ÕÍâÐÇÈËÁÐ±íºÍ×Óµ¯ÁÐ±í
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½Ð±ï¿½
 		aliens.empty()
 		bullets.empty()
 		
-		# ´´½¨Ò»ÈºÐÂµÄÍâÐÇÈË£¬²¢ÈÃ·É´¬¾ÓÖÐ
+		# ï¿½ï¿½ï¿½ï¿½Ò»Èºï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½Ã·É´ï¿½ï¿½ï¿½ï¿½ï¿½
 		create_fleet(ai_settings,screen,ship,aliens)
 		ship.center_ship()
 				
 def update_screen(ai_settings,screen,stats,sb,ship,aliens,bullets,play_button):
-	"""¸üÐÂÆÁÄ»Í¼Ïñ£¬²¢ÇÐ»»µ½ÐÂÆÁÄ»"""
-	# Ã¿´ÎÑ­»·¶¼ÖØ»æÆÁÄ»
+	"""ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»Í¼ï¿½ñ£¬²ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»"""
+	# Ã¿ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½Ä»
 	screen.fill(ai_settings.bg_color)
 	
-	# ÔÚ·É´¬ºÍÍâÐÇÈËºóÃæÖØ»æËùÓÐ×Óµ¯
+	# ï¿½Ú·É´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
 	for bullet in bullets.sprites():
 		bullet.draw_bullet()
 	
 	ship.blitme()
 	aliens.draw(screen)
-	# ÏÔÊ¾µÃ·Ö
+	# ï¿½ï¿½Ê¾ï¿½Ã·ï¿½
 	sb.show_score()
 	
-	#Èç¹ûÓÎÏ·´¦ÓÚ·Ç»î¶¯×´Ì¬£¬¾Í»æÖÆPlay°´Å¥
+	#ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½Ú·Ç»î¶¯×´Ì¬ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½Playï¿½ï¿½Å¥
 	if not stats.game_active:
 		play_button.draw_button()
 	
-	# ÈÃ×î½ü»æÖÆµÄÆÁÄ»¿É¼û
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Ä»ï¿½É¼ï¿½
 	pygame.display.flip()
 	
 def check_fleet_edges(ai_settings,aliens):
-	"""ÓÐÍâÐÇÈËµ½´ï±ßÔµÊ±²ÉÈ¡ÏàÓ¦µÄ´ëÊ©"""
+	"""ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ÔµÊ±ï¿½ï¿½È¡ï¿½ï¿½Ó¦ï¿½Ä´ï¿½Ê©"""
 	for alien in aliens.sprites():
 		if alien.check_edges():
 			change_fleet_direction(ai_settings,aliens)
 			break
 	
 def change_fleet_direction(ai_settings,aliens):
-	"""¸Ä±äÍâÐÇÈËÒÆ¶¯·½Ïò"""
+	"""ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½"""
 	for alien in aliens.sprites():
 		alien.rect.y+=ai_settings.fleet_drop_speed
 	ai_settings.fleet_direction*=-1
 	
 def update_aliens(ai_settings,stats,screen,sb,ship,aliens,bullets):
-	"""¼ì²éÊÇ·ñÓÐÍâÐÇÈËÎ»ÓÚÆÁÄ»±ßÔµ£¬²¢¸üÐÂÍâÐÇÈËÈºÖÐËùÓÐÍâÐÇÈËµÄÎ»ÖÃ"""
+	"""ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½Ôµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½Î»ï¿½ï¿½"""
 	check_fleet_edges(ai_settings,aliens)
 	aliens.update()
 	
-	# ¼ì²âÍâÐÇÈËºÍ·É´¬Ö®¼äµÄÅö×²
+	# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ËºÍ·É´ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½×²
 	if pygame.sprite.spritecollideany(ship,aliens):
 		ship_hit(ai_settings,stats,screen,sb,ship,aliens,bullets)
-	# ¼ì²âÊÇ·ñÓÐÍâÐÇÈËµ½´ïÆÁÄ»µ×²¿
+	# ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½×²ï¿½
 	check_aliens_bottom(ai_settings,stats,screen,ship,aliens,bullets)
 		
 def ship_hit(ai_settings,stats,screen,sb,ship,aliens,bullets):
-	"""ÏìÓ¦ÍâÐÇÈË×²µ½·É´¬"""
+	"""ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½É´ï¿½"""
 	if stats.ships_left>0:
-		# ½«ships_left¼õ1
+		# ï¿½ï¿½ships_leftï¿½ï¿½1
 		stats.ships_left-=1
 		
-		# ¸üÐÂ¼Ç·ÖÅÆ
+		# ï¿½ï¿½ï¿½Â¼Ç·ï¿½ï¿½ï¿½
 		sb.prep_ships()
 
-		# Çå¿ÕÍâÐÇÈËºÍ×Óµ¯
+		# ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½Óµï¿½
 		aliens.empty()
 		bullets.empty()
 
-		# ´´½¨Ò»ÈºÐÂÍâÐÇÈË£¬²¢½«·É´¬·Åµ½ÆÁÄ»µ×²¿ÖÐÑë
+		# ï¿½ï¿½ï¿½ï¿½Ò»Èºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É´ï¿½ï¿½Åµï¿½ï¿½ï¿½Ä»ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½
 		create_fleet(ai_settings,screen,ship,aliens)
 		ship.center_ship()
 
-		# ÔÝÍ£
+		# ï¿½ï¿½Í£
 		sleep(0.5)
 	else:
 		stats.game_active=False
 		pygame.mouse.set_visible(True)
 	
 def check_aliens_bottom(ai_settings,stats,screen,ship,aliens,bullets):
-	# ¼ì²âÊÇ·ñÓÐÍâÐÇÈËµ½´ïÆÁÄ»µ×²¿
+	# ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½×²ï¿½
 	screen_rect=screen.get_rect()
 	for alien in aliens.sprites():
 		if alien.rect.bottom>=screen_rect.bottom:
@@ -225,7 +225,7 @@ def check_aliens_bottom(ai_settings,stats,screen,ship,aliens,bullets):
 			break
 			
 def check_high_score(stats,sb):
-	"""¼ì²éÊÇ·ñµ®ÉúÁËÐÂµÄ×î¸ßµÃ·Ö"""
+	"""ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ßµÃ·ï¿½"""
 	if stats.score>stats.high_score:
 		stats.high_score=stats.score
 		sb.prep_high_score()
