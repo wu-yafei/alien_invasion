@@ -111,7 +111,7 @@ def check_events(ai_settings,screen,stats,sb,play_button,ship,aliens,bullets):
 	for event in pygame.event.get():
 		if event.type==pygame.QUIT:
 			save_high_score(ai_settings,stats)
-			sys.exit()
+			sys.exit(0)
 		elif event.type==pygame.KEYDOWN:
 			check_keydown_events(event,ai_settings,screen,stats,ship,bullets)	
 		elif event.type==pygame.KEYUP:
